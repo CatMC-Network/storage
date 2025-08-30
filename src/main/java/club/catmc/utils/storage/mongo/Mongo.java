@@ -3,7 +3,10 @@ package club.catmc.utils.storage.mongo;
 import club.catmc.utils.storage.mongo.annotations.Document;
 import club.catmc.utils.storage.mongo.annotations.Field;
 import club.catmc.utils.storage.mongo.annotations.Indexed;
+import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -15,13 +18,18 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.bson.codecs.pojo.Conventions.ANNOTATION_CONVENTION;
 
 public class Mongo {
 
-    private final String connectionString;
+    private String connectionString;
     private final String databaseName;
+    private String host;
+    private int port;
+    private String username;
+    private char[] password;
     private MongoClient mongoClient;
     private MongoDatabase database;
 
@@ -30,8 +38,26 @@ public class Mongo {
         this.databaseName = databaseName;
     }
 
+    public Mongo(String host, int port, String username, String password, String databaseName) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password.toCharArray();
+        this.databaseName = databaseName;
+    }
+
     public void init() {
-        this.mongoClient = MongoClients.create(connectionString);
+        if (connectionString != null) {
+            this.mongoClient = MongoClients.create(new ConnectionString(connectionString));
+        } else {
+            MongoCredential credential = MongoCredential.createCredential(username, databaseName, password);
+            this.mongoClient = MongoClients.create(
+                    MongoClientSettings.builder()
+                            .applyToClusterSettings(builder ->
+                                    builder.hosts(Collections.singletonList(new ServerAddress(host, port))))
+                            .credential(credential)
+                            .build());
+        }
     }
 
     public void start() {

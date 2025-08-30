@@ -10,11 +10,13 @@ import redis.clients.jedis.JedisPubSub;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.net.URI;
 
 public class Redis {
 
-    private final String host;
-    private final int port;
+    private String host;
+    private int port;
+    private String uri;
     private final Gson gson = new Gson();
     private Jedis jedis;
 
@@ -23,8 +25,16 @@ public class Redis {
         this.port = port;
     }
 
+    public Redis(String uri) {
+        this.uri = uri;
+    }
+
     public void init() {
-        this.jedis = new Jedis(host, port);
+        if (uri != null) {
+            this.jedis = new Jedis(URI.create(uri));
+        } else {
+            this.jedis = new Jedis(host, port);
+        }
     }
 
     public void start() {
