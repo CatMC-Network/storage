@@ -6,7 +6,7 @@
   <groupId>club.catmc.utils.storage</groupId>
   <artifactId>storage</artifactId>
   <packaging>jar</packaging>
-  <version>0.2</version>
+  <version>0.3</version>
   <name>storage</name>
 
   <distributionManagement>
