@@ -16,6 +16,7 @@
     <module>storage-mariadb</module>
     <module>storage-sqlite</module>
     <module>storage-yml</module>
+    <module>storage-json</module>
   </modules>
 
   <distributionManagement>
