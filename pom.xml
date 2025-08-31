@@ -17,7 +17,7 @@
     <module>storage-sqlite</module>
     <module>storage-yml</module>
     <module>storage-json</module>
-    <module>storage-rethinkdb</module>
+    <!-- <module>storage-rethinkdb</module> -->
   </modules>
 
   <distributionManagement>
