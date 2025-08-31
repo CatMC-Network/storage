@@ -15,6 +15,7 @@
     <module>storage-mysql</module>
     <module>storage-mariadb</module>
     <module>storage-sqlite</module>
+    <module>storage-yml</module>
   </modules>
 
   <distributionManagement>
@@ -66,6 +67,11 @@
         <groupId>org.xerial</groupId>
         <artifactId>sqlite-jdbc</artifactId>
         <version>3.45.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>2.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
