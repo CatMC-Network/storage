@@ -5,7 +5,7 @@
   <groupId>club.catmc.utils.storage</groupId>
   <artifactId>storage-parent</artifactId>
   <packaging>pom</packaging>
-  <version>0.4</version>
+  <version>0.5</version>
   <name>storage-parent</name>
 
   <modules>
