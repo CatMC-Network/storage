@@ -3,7 +3,7 @@ package club.catmc.utils.storage.rethinkdb;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 
-public class RethinkDB {
+public class RethinkDBStorage {
 
     private final String host;
     private final int port;
@@ -12,7 +12,7 @@ public class RethinkDB {
     private final String username;
     private final String password;
 
-    public RethinkDB(String host, int port, String username, String password) {
+    public RethinkDBStorage(String host, int port, String username, String password) {
         this.host = host;
         this.port = port;
         this.username = username;
